@@ -1,39 +1,19 @@
-import { GoogleMap, Marker } from '@react-google-maps/api';
-
+/* global google */
 import { Loader } from '@googlemaps/js-api-loader';
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
 
-import { Wrapper } from '@googlemaps/react-wrapper';
-import Rick from './markers/rick26.png'
-import Morty from './markers/morty.png'
+import React from 'react';
 import source from './pin.gltf'
 import './Map.css';
 // import { useState } from 'react';
 
-export const Map = ({ position, setPosition, pressedMap, setPressedMap, originalPosition, showResult }) => {
-    const MapsKey = process.env.REACT_APP_MAPS_API
-    const MapId = process.env.REACT_APP_MAPID
-
-    const handleMapClick = (event) => {
-        setPressedMap(true)
-        if (!showResult)
-            setPosition(event.latLng)
-    }
-
-    const containerStyleForDesktop = {
-        width: '48vw',
-        height: '95vh'
-    };
-
-    const containerStyleForMobile = {
-        width: '92vw',
-        height: '48vh'
-    };
+export function Map({ position}) {
+    const MapsKey = 'AIzaSyAJ2Lelz6BpFNO3kSsoRGZgXHH3hQuG6o8'
+    const MapId = '2bd47652678f8b78'
 
     const apiOptions = {
-        "apiKey": MapsKey,
-        "version": "beta"
+        "apiKey": MapsKey
     };
 
     const mapOptions = {
@@ -46,12 +26,11 @@ export const Map = ({ position, setPosition, pressedMap, setPressedMap, original
         minZoom: 2,
         maxZoom: 18,
         zoom: 18,
-        // borderRadius: '30px',
+        borderRadius: '30px',
         mapId: MapId,
         center: position,
         clickableIcons: false,
         draggable: true,
-        onClick: handleMapClick,
         // mapContainerStyle: document.getElementsByTagName('body')[0].clientWidth > 600 ? containerStyleForDesktop : containerStyleForMobile
 
     };
@@ -80,7 +59,7 @@ export const Map = ({ position, setPosition, pressedMap, setPressedMap, original
             loader.load(
                 source,
                 gltf => {
-                    gltf.scene.scale.set(25,25,25);
+                    gltf.scene.scale.set(20,20,20);
                     gltf.scene.rotation.x = 180 * Math.PI/180;
                     scene.add(gltf.scene);
                 }
@@ -88,8 +67,6 @@ export const Map = ({ position, setPosition, pressedMap, setPressedMap, original
         }
 
         webGLOverlayView.onContextRestored = ({gl}) => {
-            // create the three.js renderer, using the
-            // maps's WebGL rendering context.
             renderer = new THREE.WebGLRenderer({
                 canvas: gl.canvas,
                 context: gl,
@@ -142,37 +119,36 @@ export const Map = ({ position, setPosition, pressedMap, setPressedMap, original
         const map = await initMap();
         initWebGLOverlayView(map);
     })();
-    const defaultMapOptions = {
-        fullscreenControl: false,
-        mapTypeControl: false,
-        streetViewControl: false,
-        zoomControl: true,
-        keyboardShortcuts: false,
-        draggableCursor: 'crosshair',
-        minZoom: 2,
-        maxZoom: 18,
-        borderRadius: '30px'
-    };
-    return (
-        <div className='map'>
-            <Wrapper apiKey={MapsKey}>
-                <GoogleMap
-                    mapContainerStyle={{
-                        width: '48vw',
-                        height: '95vh'
-                    }}
-                    center={position}
-                    zoom={0}
-                    clickableIcons={false}
-                    draggable={true}
-                    options={defaultMapOptions}
-                    onClick={handleMapClick}
-                    mapTypeId={'terrain'}
-                >
-                    <Marker icon={{ url: Morty }} visible={pressedMap ? true : false} cursor={'crosshair'} position={position}></Marker>
-                    <Marker icon={{ url: Rick }} visible={showResult ? true : false} cursor={'crosshair'} position={originalPosition}></Marker>
-                </GoogleMap>
-            </Wrapper>
-        </div >
-    );
+    // const defaultMapOptions = {
+    //     fullscreenControl: false,
+    //     mapTypeControl: false,
+    //     streetViewControl: false,
+    //     zoomControl: true,
+    //     keyboardShortcuts: false,
+    //     draggableCursor: 'crosshair',
+    //     minZoom: 2,
+    //     maxZoom: 18,
+    //     borderRadius: '30px'
+    // };
+    // return (
+    //     <div className='map'>
+    //         <Wrapper apiKey={MapsKey}>
+    //             <GoogleMap
+    //                 mapContainerStyle={{
+    //                     width: '48vw',
+    //                     height: '95vh'
+    //                 }}
+    //                 center={position}
+    //                 zoom={0}
+    //                 clickableIcons={false}
+    //                 draggable={true}
+    //                 options={defaultMapOptions}
+    //                 mapTypeId={'terrain'}
+    //             >
+    //                 <Marker icon={{ url: Morty }} visible={pressedMap ? true : false} cursor={'crosshair'} position={position}></Marker>
+    //                 <Marker icon={{ url: Rick }} visible={showResult ? true : false} cursor={'crosshair'} position={originalPosition}></Marker>
+    //             </GoogleMap>
+    //         </Wrapper>
+    //     </div >
+    // );
 }
