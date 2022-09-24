@@ -37,22 +37,22 @@ export const Map = ({ position, setPosition, pressedMap, setPressedMap, original
     };
 
     const mapOptions = {
-        fullscreenControl: false,
-        mapTypeControl: false,
-        streetViewControl: false,
-        zoomControl: true,
-        keyboardShortcuts: false,
-        draggableCursor: 'crosshair',
+        // fullscreenControl: false,
+        // mapTypeControl: false,
+        // streetViewControl: false,
+        // zoomControl: true,
+        // keyboardShortcuts: false,
+        // draggableCursor: 'crosshair',
         minZoom: 2,
         maxZoom: 18,
         zoom: 18,
-        borderRadius: '30px',
+        // borderRadius: '30px',
         mapId: MapId,
         center: position,
         clickableIcons: false,
         draggable: true,
         onClick: handleMapClick,
-        mapTypeId: 'terrain',
+        // mapContainerStyle: document.getElementsByTagName('body')[0].clientWidth > 600 ? containerStyleForDesktop : containerStyleForMobile
 
     };
 
@@ -68,22 +68,20 @@ export const Map = ({ position, setPosition, pressedMap, setPressedMap, original
         const webGLOverlayView = new google.maps.WebGLOverlayView();
 
         webGLOverlayView.onAdd = () => {
-            // set up the scene
             scene = new THREE.Scene();
             camera = new THREE.PerspectiveCamera();
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.75); // soft white light
-            scene.add(ambientLight);
+            const ambientLight = new THREE.AmbientLight( 0xffffff, 0.75 ); // soft white light
+            scene.add( ambientLight );
             const directionalLight = new THREE.DirectionalLight(0xffffff, 0.25);
             directionalLight.position.set(0.5, -1, 0.5);
             scene.add(directionalLight);
 
-            // load the model
             loader = new GLTFLoader();
             loader.load(
                 source,
                 gltf => {
-                    gltf.scene.scale.set(25, 25, 25);
-                    gltf.scene.rotation.x = 180 * Math.PI / 180; // rotations are in radians
+                    gltf.scene.scale.set(25,25,25);
+                    gltf.scene.rotation.x = 180 * Math.PI/180;
                     scene.add(gltf.scene);
                 }
             );
@@ -159,7 +157,10 @@ export const Map = ({ position, setPosition, pressedMap, setPressedMap, original
         <div className='map'>
             <Wrapper apiKey={MapsKey}>
                 <GoogleMap
-                    mapContainerStyle={document.getElementsByTagName('body')[0].clientWidth > 600 ? containerStyleForDesktop : containerStyleForMobile}
+                    mapContainerStyle={{
+                        width: '48vw',
+                        height: '95vh'
+                    }}
                     center={position}
                     zoom={0}
                     clickableIcons={false}

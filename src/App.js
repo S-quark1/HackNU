@@ -29,7 +29,6 @@ function App() {
     const [personAct, setPersonAct] = useState('') // person's desc
 
     const [randomCity, setRandomCity] = useState([])
-    const [coords, setCoords] = useState([]) // city's corrds + country name + city name
     const [result, setResult] = useState(false) //verdict
     const [showResult, setShowResult] = useState(false) //if user has pressed 'check my answer'
     const [askedHint, setAskedHint] = useState(false) //if user has asked the hint
@@ -63,8 +62,74 @@ function App() {
         setPressedMap(true)
     }
 
+    function btn3() {
+        setPosition({lat: lat[2], lng: lng[2]})
+        setPersonId(id[2])
+        setPersonTm(tm[2])
+        setPersonFl(fl[2])
+        setPersonHa(ha[2])
+        setPersonVa(va[2])
+        setPersonAct(act[2])
+        setPressedMap(true)
+    }
+
+    function btn4() {
+        setPosition({lat: lat[3], lng: lng[3]})
+        setPersonId(id[3])
+        setPersonTm(tm[3])
+        setPersonFl(fl[3])
+        setPersonHa(ha[3])
+        setPersonVa(va[3])
+        setPersonAct(act[3])
+        setPressedMap(true)
+    }
+
+    function btn5() {
+        setPosition({lat: lat[4], lng: lng[4]})
+        setPersonId(id[4])
+        setPersonTm(tm[4])
+        setPersonFl(fl[4])
+        setPersonHa(ha[4])
+        setPersonVa(va[4])
+        setPersonAct(act[4])
+        setPressedMap(true)
+    }
+
+    function btn6() {
+        setPosition({lat: lat[5], lng: lng[5]})
+        setPersonId(id[5])
+        setPersonTm(tm[5])
+        setPersonFl(fl[5])
+        setPersonHa(ha[5])
+        setPersonVa(va[5])
+        setPersonAct(act[5])
+        setPressedMap(true)
+    }
+
+    function btn7() {
+        setPosition({lat: lat[6], lng: lng[6]})
+        setPersonId(id[6])
+        setPersonTm(tm[6])
+        setPersonFl(fl[6])
+        setPersonHa(ha[6])
+        setPersonVa(va[6])
+        setPersonAct(act[6])
+        setPressedMap(true)
+    }
+
+    // function btn8() {
+    //     setPosition({lat: lat[7], lng: lng[7]})
+    //     setPersonId(id[7])
+    //     setPersonTm(tm[7])
+    //     setPersonFl(fl[7])
+    // }
+
     return (
-        <div className='all'>
+        // eslint-disable-next-line react/style-prop-object
+        <div id="root" style="min-height: 700px; width: 50vw;">
+
+            <div id="main" style="min-height: 700px; max-width: 100vw;"> aaaaaaaaaaaaaaa</div>
+        <div className='all'style="display: flex; flex-direction: row; justify-content: space-between; margin: 200px">
             <div className='app' >
                 <div id='int-area'>
                     <button onClick={btn1} type="submit">dev1</button>
@@ -78,6 +143,8 @@ function App() {
                 {/*<Marker icon={{ url: Morty }} visible={pressedMap} cursor={'crosshair'} position={position}></Marker>*/}
             </div>
         </div>
+        </div>
+
     );
 }
 
