@@ -39,7 +39,7 @@ export const Map = ({ position, setPosition, pressedMap, setPressedMap, original
 
     async function initMap() {
         const google = window.google
-        const mapDiv = document.getElementsByTagName('body')[0];
+        const mapDiv = document.getElementById('map');
         const apiLoader = new Loader(apiOptions);
         await apiLoader.load();
         return new google.maps.Map(mapDiv, mapOptions)
@@ -49,10 +49,6 @@ export const Map = ({ position, setPosition, pressedMap, setPressedMap, original
         let scene, renderer, camera, loader;
         // WebGLOverlayView code goes here
     }
-
-    (async () => {
-        const map = await initMap();
-    })();
 
     const mapOptions = {
         fullscreenControl: false,
@@ -68,6 +64,9 @@ export const Map = ({ position, setPosition, pressedMap, setPressedMap, original
         mapId: MapId,
         center: position
     };
+    // (async () => {
+    //     const map = await initMap();
+    // })();
     return (
         <div className='map'>
             <Wrapper apiKey={MapsKey}>

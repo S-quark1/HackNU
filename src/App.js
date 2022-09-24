@@ -78,11 +78,12 @@ function App() {
                         className='country'> {coords[2]}</span>.</h4>
                     <h4 className={result ? 'disable' : 'enable'}>Your guess was <span
                         className='capital'>{distance} KM</span> from the correct location.</h4>
-                </div><div id="map">
+                </div>
+            </div>
+            <div id="map">
                 <Map position={position} setPosition={setPosition} pressedMap={pressedMap}
                      setPressedMap={setPressedMap} originalPosition={originalPosition} showResult={showResult}
                      answered={answered} setAnswered={setAnswered}/>
-            </div>
             </div>
 
         </div>
