@@ -2,14 +2,13 @@
 // /* eslint-disable no-undef */
 import './App.css';
 import React from 'react';
-import {capitals} from './capitals';
 import axios from 'axios';
 import {useEffect, useState} from 'react';
 import {Map} from './Map';
-import {getDistance} from './getDistance';
+import Morty from "./markers/morty.png";
+import {Marker} from "@react-google-maps/api";
 
 function App() {
-    const WeatherKey = process.env.REACT_APP_WEATHER_API
 
     const lat = [35.66093428, 40.74352284, 51.50452146]
     const lng = [139.7290334, -74.00695075, -0.086503248]
@@ -35,7 +34,7 @@ function App() {
     const [showResult, setShowResult] = useState(false) //if user has pressed 'check my answer'
     const [askedHint, setAskedHint] = useState(false) //if user has asked the hint
     const [pressedMap, setPressedMap] = useState(false) //if user has pressed the map
-    const [position, setPosition] = useState({lat: 0, lng: 0}) //position of user's marker
+    const [position, setPosition] = useState({lat: 35.66093428, lng: 139.7290334}) //position of user's marker
     const [originalPosition, setOriginalPosition] = useState({lat: 43.238949, lng: 76.889709}) //position of original city's marker
     const [answered, setAnswered] = useState(true)
     const [distance, setDistance] = useState(0)
@@ -66,26 +65,18 @@ function App() {
 
     return (
         <div className='all'>
-            <div className='app'>
+            <div className='app' >
                 <div id='int-area'>
                     <button onClick={btn1} type="submit">dev1</button>
                     <button onClick={btn2} type="submit">dev2</button>
                 </div>
-
-                <div className={showResult ? 'enable text result' : 'result disable text'}>
-                    <h4>You are <span className={result ? 'right' : 'wrong'}>{result ? 'right' : 'wrong'}!</span> <span
-                        className='capital'>{coords[3]}</span> is the capital of <span
-                        className='country'> {coords[2]}</span>.</h4>
-                    <h4 className={result ? 'disable' : 'enable'}>Your guess was <span
-                        className='capital'>{distance} KM</span> from the correct location.</h4>
-                </div>
             </div>
-            <div id="map">
+            <div id="map" >
                 <Map position={position} setPosition={setPosition} pressedMap={pressedMap}
                      setPressedMap={setPressedMap} originalPosition={originalPosition} showResult={showResult}
                      answered={answered} setAnswered={setAnswered}/>
+                {/*<Marker icon={{ url: Morty }} visible={pressedMap} cursor={'crosshair'} position={position}></Marker>*/}
             </div>
-
         </div>
     );
 }
